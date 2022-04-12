@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:http/http.dart';
-import 'package:http_interceptor/http/interceptor_contract.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
 class LoggingInterceptor implements InterceptorContract {
@@ -27,11 +26,11 @@ class LoggingInterceptor implements InterceptorContract {
 }
 
 Future<List<Transaction>> findAll() async {
-  final http = InterceptedHttp.build(interceptors: [
-    LoggingInterceptor(),
-  ]);
-  final Response response =
-      await http.get('http://192.168.122.1:8080/transactions');
+  final Client client = InterceptedClient.build(
+    interceptors: [LoggingInterceptor()],
+  );
+  final response =
+      await client.get('http://172.17.0.1:8080/transactions');
   final List<dynamic> decodedJson = jsonDecode(response.body);
   final List<Transaction> transactions = [];
   for (Map<String, dynamic> transactionJson in decodedJson) {
