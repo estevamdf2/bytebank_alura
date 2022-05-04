@@ -50,7 +50,7 @@ class Dashboard extends StatelessWidget {
 class _FeatureItem extends StatelessWidget {
   final String name;
   final IconData icon;
-  final Function? onClick;
+  final Function onClick;
 
   _FeatureItem(
     this.name,
@@ -65,7 +65,7 @@ class _FeatureItem extends StatelessWidget {
       child: Material(
         color: Theme.of(context).primaryColor,
         child: InkWell(
-          onTap: () => onClick!(),
+          onTap: () => onClick(),
           child: Container(
             height: 100,
             width: 150,

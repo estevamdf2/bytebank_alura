@@ -41,7 +41,7 @@ class _ContactsListState extends State<ContactsList> {
             case ConnectionState.active:
               break;
             case ConnectionState.done:
-              List<Contact> contacts = snapshot.data!;
+              List<Contact> contacts = snapshot.data;
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final Contact contact = contacts[index];

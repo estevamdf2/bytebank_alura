@@ -47,8 +47,8 @@ class FormularioTransferenciaState extends State<FormularioTransferencia> {
   }
 
   void _criaTransferencia() {
-    final int? numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
-    final double? valor = double.tryParse(_controladorCampoValor.text);
+    final int numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
+    final double valor = double.tryParse(_controladorCampoValor.text);
 
     if (numeroConta != null && valor != null) {
       final transferenciaCriada = Transferencia(valor, numeroConta);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Editor extends StatelessWidget {
-  final TextEditingController? controlador;
-  final String? rotulo;
-  final String? dica;
-  final IconData? icone;
+  final TextEditingController controlador;
+  final String rotulo;
+  final String dica;
+  final IconData icone;
 
   Editor({this.controlador, this.rotulo, this.dica, this.icone});
 

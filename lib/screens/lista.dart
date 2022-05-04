@@ -28,7 +28,7 @@ class ListaTransferenciaState extends State<ListaTransferencias> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          final Future<Transferencia?> future =
+          final Future<Transferencia> future =
               Navigator.push(context, MaterialPageRoute(builder: (context) {
             return FormularioTransferencia();
           }));
@@ -40,7 +40,7 @@ class ListaTransferenciaState extends State<ListaTransferencias> {
     );
   }
 
-  void _atualiza(Transferencia? transferenciaRecebida) {
+  void _atualiza(Transferencia transferenciaRecebida) {
     if (transferenciaRecebida != null) {
       setState(() {
         widget._transferencias.add(transferenciaRecebida);

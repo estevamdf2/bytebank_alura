@@ -28,7 +28,7 @@ Future<int> save(Contact contact) async {
 
 Future<List<Contact>> findAll() async {
   final Database db = await getDatabase();
-  final List<Map<String, Object?>> result = await db.query('contacts');
+  final List<Map<String, Object>> result = await db.query('contacts');
   final List<Contact> contacts = [];
   for (Map<String, dynamic> row in result) {
     final Contact contact =
