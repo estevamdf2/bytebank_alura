@@ -25,12 +25,14 @@ class LoggingInterceptor implements InterceptorContract {
   }
 }
 
+final Client client = InterceptedClient.build(
+  interceptors: [LoggingInterceptor()],
+);
+
+const String baseUrl = 'http://192.168.1.7:8080/transactions';
+
 Future<List<Transaction>> findAll() async {
-  final Client client = InterceptedClient.build(
-    interceptors: [LoggingInterceptor()],
-  );
-  final response =
-      await client.get(Uri.parse('http://192.168.1.7:8080/transactions'));
+  final response = await client.get(Uri.parse(baseUrl));
   final List<dynamic> decodedJson = jsonDecode(response.body);
   final List<Transaction> transactions = [];
   for (Map<String, dynamic> transactionJson in decodedJson) {
@@ -40,4 +42,25 @@ Future<List<Transaction>> findAll() async {
     transactions.add(transaction);
   }
   return transactions;
+}
+
+Future<Transaction> save(Transaction transaction) async {
+  Contact contact = transaction.contact;
+  final Map<String, dynamic> transactionMap = {
+    'value': transaction.value,
+    'contact': {'name': contact.name, 'accountNumber': contact.accountNumber}
+  };
+
+  final String transactionJson = jsonEncode(transactionMap);
+
+  final Response response = await client.post(Uri.parse(baseUrl),
+      headers: {'Content-type': 'application/json', 'password': '1000'},
+      body: transactionJson);
+
+  Map<String, dynamic> transactionEnconded = jsonDecode(response.body);
+  final Map<String, dynamic> contactJson = transactionEnconded['contact'];
+  return Transaction(
+    transactionEnconded['value'],
+    Contact(0, contactJson['name'], contactJson['accountNumber']),
+  );
 }

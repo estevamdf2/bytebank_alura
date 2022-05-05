@@ -1,11 +1,14 @@
 import 'package:bytebank/http/webclient.dart';
+import 'package:bytebank/models/transaction.dart';
+import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 //Todo implementar update e delete e depois ir para o kart manager.
 void main() {
   runApp(BytebankApp());
-  findAll().then((transactions) => print('new transactions $transactions'));
+  //save(Transaction(200.0, Contact(0, 'Gui', 2000))).then((transaction) => print(transaction));
+  //findAll().then((transactions) => print('new transactions $transactions'));
 }
 
 class BytebankApp extends StatelessWidget {
