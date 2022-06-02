@@ -96,13 +96,35 @@ class _TransactionFormState extends State<TransactionForm> {
             builder: (contextDialog) {
               return SuccessDialog('successful transaction');
             }).then((value) => Navigator.pop(context));
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: const Text('sucessful transaction'),
+        //       action: SnackBarAction(
+        //         label: 'Action',
+        //         onPressed: () {
+        //           Navigator.pop(context);
+        //         },
+        //       ),
+        //     ),
+        //   );
       }
     }).catchError((e) {
-      showDialog(
-          context: context,
-          builder: (contextDialog) {
-            return FailureDialog(e.message);
-          });
+      // showDialog(
+      //     context: context,
+      //     builder: (contextDialog) {
+      //       return FailureDialog(e.message);
+      //     });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('abc'),
+          action: SnackBarAction(
+            label: 'Action',
+            onPressed: () {
+              return Navigator.pop(context);
+            },
+          ),
+        ),
+      );
     }, test: (e) => e is Exception);
   }
 }
