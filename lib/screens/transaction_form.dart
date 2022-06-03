@@ -139,6 +139,12 @@ class _TransactionFormState extends State<TransactionForm> {
           ),
         ),
       );
-    }, test: (e) => e is TimeoutException);
+    }, test: (e) => e is TimeoutException).catchError((e) {
+      showDialog(
+          context: context,
+          builder: (contextDialog) {
+            return FailureDialog('Unknow error');
+          });
+    }, test: (e) => e is Exception);
   }
 }
