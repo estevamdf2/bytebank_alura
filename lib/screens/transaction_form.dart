@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bytebank/components/response_dialog.dart';
 import 'package:bytebank/components/transaction_auth_dialog.dart';
 import 'package:bytebank/http/webclient.dart';
@@ -109,14 +111,26 @@ class _TransactionFormState extends State<TransactionForm> {
         //   );
       }
     }).catchError((e) {
-      // showDialog(
-      //     context: context,
-      //     builder: (contextDialog) {
-      //       return FailureDialog(e.message);
-      //     });
+      showDialog(
+          context: context,
+          builder: (contextDialog) {
+            return FailureDialog(e.message);
+          });
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: const Text('abc'),
+      //     action: SnackBarAction(
+      //       label: 'Action',
+      //       onPressed: () {
+      //         return Navigator.pop(context);
+      //       },
+      //     ),
+      //   ),
+      // );
+    }, test: (e) => e is HttpException).catchError((e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('abc'),
+          content: const Text('Timeout exceed after transaction'),
           action: SnackBarAction(
             label: 'Action',
             onPressed: () {
@@ -125,6 +139,6 @@ class _TransactionFormState extends State<TransactionForm> {
           ),
         ),
       );
-    }, test: (e) => e is Exception);
+    }, test: (e) => e is TimeoutException);
   }
 }
