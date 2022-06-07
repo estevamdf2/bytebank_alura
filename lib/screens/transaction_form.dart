@@ -7,6 +7,7 @@ import 'package:bytebank/http/webclients/transaction_webclient.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class TransactionForm extends StatefulWidget {
   final Contact contact;
@@ -20,6 +21,7 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
   final TransactionWebClient _webClient = TransactionWebClient();
+  final String transactionId = Uuid().v4();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class _TransactionFormState extends State<TransactionForm> {
                       final double value =
                           double.tryParse(_valueController.text);
                       final transactionCreated =
-                          Transaction(value, widget.contact);
+                          Transaction(transactionId, value, widget.contact);
                       showDialog(
                           context: context,
                           builder: (contextDialog) {
@@ -111,40 +113,31 @@ class _TransactionFormState extends State<TransactionForm> {
         //   );
       }
     }).catchError((e) {
-      showDialog(
-          context: context,
-          builder: (contextDialog) {
-            return FailureDialog(e.message);
-          });
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: const Text('abc'),
-      //     action: SnackBarAction(
-      //       label: 'Action',
-      //       onPressed: () {
-      //         return Navigator.pop(context);
-      //       },
-      //     ),
-      //   ),
-      // );
+      _showFailureMessage(context, message: e.message);
     }, test: (e) => e is HttpException).catchError((e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Timeout exceed after transaction'),
-          action: SnackBarAction(
-            label: 'Action',
-            onPressed: () {
-              return Navigator.pop(context);
-            },
-          ),
-        ),
-      );
+      _showFailureMessage(context, message: 'Timeout exceed after transaction');
     }, test: (e) => e is TimeoutException).catchError((e) {
-      showDialog(
-          context: context,
-          builder: (contextDialog) {
-            return FailureDialog('Unknow error');
-          });
+      _showFailureMessage(context);
     }, test: (e) => e is Exception);
+  }
+
+  void _showFailureMessage(BuildContext context,
+      {String message = 'Unknown error'}) {
+    showDialog(
+        context: context,
+        builder: (contextDialog) {
+          return FailureDialog(message);
+        });
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     content: const Text('abc'),
+    //     action: SnackBarAction(
+    //       label: 'Action',
+    //       onPressed: () {
+    //         return Navigator.pop(context);
+    //       },
+    //     ),
+    //   ),
+    // );
   }
 }
