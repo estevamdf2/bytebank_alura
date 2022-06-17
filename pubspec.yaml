@@ -35,6 +35,8 @@ dependencies:
   http_interceptor: ^1.0.1
   cupertino_icons: ^1.0.2
   uuid:
+  firebase_core:
+  firebase_crashlytics:
 
 dev_dependencies:
   flutter_test:
