@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bytebank/screens/dashboard.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,7 +19,9 @@ void main() async {
     FirebaseCrashlytics.instance.setUserIdentifier('Alura123');
   }
 
-  runApp(BytebankApp());
+  runZonedGuarded<Future<void>>(() async {
+    runApp(BytebankApp());
+  }, FirebaseCrashlytics.instance.recordError);
 }
 
 class BytebankApp extends StatelessWidget {

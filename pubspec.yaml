@@ -37,6 +37,7 @@ dependencies:
   uuid:
   firebase_core:
   firebase_crashlytics:
+  toast:
 
 dev_dependencies:
   flutter_test:

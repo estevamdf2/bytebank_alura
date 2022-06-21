@@ -8,6 +8,7 @@ import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import 'package:uuid/uuid.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -24,10 +25,12 @@ class _TransactionFormState extends State<TransactionForm> {
   final TransactionWebClient _webClient = TransactionWebClient();
   final String transactionId = Uuid().v4();
   bool _sending = false;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('New transaction'),
       ),
@@ -173,11 +176,17 @@ class _TransactionFormState extends State<TransactionForm> {
     BuildContext context, {
     String message = 'Unknown error',
   }) {
-    showDialog(
-        context: context,
-        builder: (contextDialog) {
-          return FailureDialog(message);
-        });
+    // showDialog(
+    //     context: context,
+    //     builder: (contextDialog) {
+    //       return FailureDialog(message);
+    //     });
+
+    //Implementação do curso de crashAnalitcys
+    // final snackBar = SnackBar(content: Text(message));
+    // _scaffoldKey.currentState.showSnackBar(snackBar);
+
+    showToast(message, gravity: Toast.bottom);
 
     // ScaffoldMessenger.of(context).showSnackBar(
     //   SnackBar(
@@ -190,5 +199,9 @@ class _TransactionFormState extends State<TransactionForm> {
     //     ),
     //   ),
     // );
+  }
+
+  void showToast(String msg, {int duration = 5, int gravity}) {
+    Toast.show(msg, duration: duration, gravity: gravity);
   }
 }
