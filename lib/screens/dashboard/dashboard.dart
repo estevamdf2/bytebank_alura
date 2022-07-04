@@ -19,9 +19,7 @@ class Dashboard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset('images/bytebank_logo.png'),
             ),
-            Container(
-                child: SaldoCard(Saldo(1065.40)),
-                alignment: Alignment.topCenter),
+            Container(child: SaldoCard(), alignment: Alignment.topCenter),
             Container(
               height: 120,
               child:
