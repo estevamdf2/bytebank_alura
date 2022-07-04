@@ -1,7 +1,7 @@
-import 'package:bytebank/components/saldo.dart';
+import 'package:bytebank/models/saldo.dart';
+import 'package:bytebank/screens/dashboard/saldo_card.dart';
 import 'package:bytebank/screens/contats_list.dart';
 import 'package:bytebank/screens/transactions_list.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
@@ -19,7 +19,9 @@ class Dashboard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset('images/bytebank_logo.png'),
             ),
-            Container(child: Saldo(), alignment: Alignment.topCenter),
+            Container(
+                child: SaldoCard(Saldo(1065.40)),
+                alignment: Alignment.topCenter),
             Container(
               height: 120,
               child:
