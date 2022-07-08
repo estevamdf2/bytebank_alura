@@ -3,6 +3,7 @@ import 'package:bytebank/screens/dashboard/saldo_card.dart';
 import 'package:bytebank/screens/contats_list.dart';
 import 'package:bytebank/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Dashboard extends StatelessWidget {
   @override
@@ -19,7 +20,20 @@ class Dashboard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset('images/bytebank_logo.png'),
             ),
-            Container(child: SaldoCard(), alignment: Alignment.topCenter),
+            Container(
+                child: ListView(children: <Widget>[
+              Align(
+                alignment: Alignment.topCenter,
+                child: SaldoCard(),
+              ),
+              Consumer<Saldo>(builder: (context, saldo, child) {
+                return ElevatedButton(
+                    child: Text('Adiciona'),
+                    onPressed: () {
+                      saldo.adiciona(10);
+                    });
+              })
+            ])),
             Container(
               height: 120,
               child:

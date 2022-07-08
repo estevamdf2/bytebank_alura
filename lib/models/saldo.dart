@@ -1,9 +1,13 @@
 import 'package:flutter/widgets.dart';
 
 class Saldo extends ChangeNotifier {
-  final double valor;
+  double valor;
 
   Saldo(this.valor);
+
+  void adiciona(double valor) {
+    this.valor += valor;
+  }
 
   @override
   String toString() {

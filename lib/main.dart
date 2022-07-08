@@ -6,8 +6,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
+import 'package:path/path.dart';
 
 //Todo implementar update e delete e depois ir para o kart manager.
 void main() async {
