@@ -13,43 +13,51 @@ class Dashboard extends StatelessWidget {
           title: Text('Dashboard'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset('images/bytebank_logo.png'),
-            ),
-            Container(
-                child: ListView(children: <Widget>[
-              Align(
-                alignment: Alignment.topCenter,
-                child: SaldoCard(),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset('images/bytebank_logo.png'),
+              ),
+              Container(
+                height: 80,
+                child: ListView(
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: SaldoCard(),
+                    )
+                  ],
+                ),
               ),
               Consumer<Saldo>(builder: (context, saldo, child) {
                 return ElevatedButton(
-                    child: Text('Adiciona'),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text('Adiciona'),
+                    ),
                     onPressed: () {
                       saldo.adiciona(10);
                     });
-              })
-            ])),
-            Container(
-              height: 120,
-              child:
-                  ListView(scrollDirection: Axis.horizontal, children: <Widget>[
-                _FeatureItem('Transfer', Icons.monetization_on, onClick: () {
-                  _showContactsList(context);
-                }),
-                _FeatureItem('Transaction feed', Icons.description,
-                    onClick: () => _showTransactionFeed(context)),
-                _FeatureItem('Nova feature', Icons.done, onClick: () {
-                  print('press New feature');
-                })
-              ]),
-            ),
-          ],
-        ));
+              }),
+              Container(
+                height: 120,
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      _FeatureItem('Transfer', Icons.monetization_on,
+                          onClick: () {
+                        _showContactsList(context);
+                      }),
+                      _FeatureItem('Transaction feed', Icons.description,
+                          onClick: () => _showTransactionFeed(context)),
+                      _FeatureItem('Nova feature', Icons.done, onClick: () {
+                        print('press New feature');
+                      })
+                    ]),
+              ),
+            ]));
   }
 
   void _showContactsList(BuildContext context) {
