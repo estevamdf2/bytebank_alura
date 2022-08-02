@@ -12,7 +12,6 @@ class Saldo extends ChangeNotifier {
 
   void subtrai(double valor) {
     this.valor -= valor;
-
     notifyListeners();
   }
 
