@@ -11,53 +11,55 @@ class Dashboard extends StatelessWidget {
         appBar: AppBar(
           title: Text('Dashboard'),
         ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset('images/bytebank_logo.png'),
-              ),
-              Container(
-                height: 80,
-                child: ListView(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: SaldoCard(),
-                    )
-                  ],
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset('images/bytebank_logo.png'),
                 ),
-              ),
-              ElevatedButton(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text('Receber depósito'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return FormularioDeposito();
-                    }));
-                  }),
-              Container(
-                height: 120,
-                child: ListView(
-                    scrollDirection: Axis.horizontal,
+                Container(
+                  height: 80,
+                  child: ListView(
                     children: <Widget>[
-                      _FeatureItem('Transfer', Icons.monetization_on,
-                          onClick: () {
-                        _showContactsList(context);
-                      }),
-                      _FeatureItem('Transaction feed', Icons.description,
-                          onClick: () => _showTransactionFeed(context)),
-                      _FeatureItem('Nova feature', Icons.done, onClick: () {
-                        print('press New feature');
-                      })
-                    ]),
-              ),
-            ]));
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: SaldoCard(),
+                      )
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text('Receber depósito'),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return FormularioDeposito();
+                      }));
+                    }),
+                Container(
+                  height: 120,
+                  child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        _FeatureItem('Transfer', Icons.monetization_on,
+                            onClick: () {
+                          _showContactsList(context);
+                        }),
+                        _FeatureItem('Transaction feed', Icons.description,
+                            onClick: () => _showTransactionFeed(context)),
+                        _FeatureItem('Nova feature', Icons.done, onClick: () {
+                          print('press New feature');
+                        })
+                      ]),
+                ),
+              ]),
+        ));
   }
 
   void _showContactsList(BuildContext context) {
