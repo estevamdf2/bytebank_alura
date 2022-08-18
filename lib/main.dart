@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bytebank/models/saldo.dart';
+import 'package:bytebank/models/transferencias.dart';
 import 'package:bytebank/screens/dashboard/dashboard.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,7 @@ void main() async {
     runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Saldo(0)),
+        ChangeNotifierProvider(create: (context) => Transferencias())
       ],
       child: BytebankApp(),
     ));
