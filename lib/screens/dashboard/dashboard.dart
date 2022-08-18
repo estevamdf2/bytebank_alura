@@ -1,6 +1,7 @@
 import 'package:bytebank/screens/dashboard/saldo_card.dart';
 import 'package:bytebank/screens/contats_list.dart';
 import 'package:bytebank/screens/deposito/formulario.dart';
+import 'package:bytebank/screens/formulario.dart';
 import 'package:bytebank/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
 
@@ -31,17 +32,34 @@ class Dashboard extends StatelessWidget {
                     ],
                   ),
                 ),
-                ElevatedButton(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text('Receber depósito'),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return FormularioDeposito();
-                      }));
-                    }),
+                ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.green, onPrimary: Colors.white),
+                        child: Align(
+                          child: Text('Receber depósito'),
+                        ),
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return FormularioDeposito();
+                          }));
+                        }),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.green, onPrimary: Colors.white),
+                      child: Text('Nova transferência'),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return FormularioTransferencia();
+                        }));
+                      },
+                    )
+                  ],
+                ),
                 Container(
                   height: 120,
                   child: ListView(
